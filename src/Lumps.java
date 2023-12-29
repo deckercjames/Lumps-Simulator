@@ -21,9 +21,9 @@ public class Lumps{
             String line = sc.nextLine().trim();
             String[] parts0 = line.split("\\s+");
             
-            if(line.length() == 0){
+            if (line.length() == 0) {
                 continue;
-            }else if(line.equals("quit")){
+            } else if (line.equals("quit")) {
                 break;
             }
             

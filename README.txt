@@ -3,12 +3,10 @@ Lumps Analysis
 This is a expectimax algorithm to play the dice game Lumps
 
 COMPILING
-cd src/
-javac *.java
+javac -d bin/ *.java
 
 RUNNNIG
-cd src/
-java Lumps ["sample"]
+java -cp bin/ Lumps ["sample"]
   Running with "sample" will make the program continuesusly sample initial dice rolls to get their best expected score. These are averaged to get an expected value for any turn.
   Running without "sample" will drop into a cli to evaluate a given position and give the best move
 
