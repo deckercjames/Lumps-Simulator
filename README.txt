@@ -21,3 +21,6 @@ E.G.
 >> 1 all
 d4 d4 d6 d6 d8 d8 d10 d10
 1_ 4x 4x 5x 6x 3_ 9x  8_
+
+>> roll
+Rolls a set of 8 dice and outputs the expacted value for all possible locking combinations

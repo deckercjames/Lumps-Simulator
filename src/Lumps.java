@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class Lumps{
     
+    static Random rd = new Random();
+    
     public static void main(String[] args){
         
         if(args.length >= 1 && args[0].equals("sample")){
@@ -19,12 +21,24 @@ public class Lumps{
             System.out.print(">> ");
             
             String line = sc.nextLine().trim();
-            String[] parts0 = line.split("\\s+");
             
             if (line.length() == 0) {
                 continue;
-            } else if (line.equals("quit")) {
+            }
+            
+            if (line.equals("quit")) {
                 break;
+            }
+            
+            String[] parts0 = line.split("\\s+");
+            
+            if (parts0[0].equals("roll")) {
+                int[] dice = getDiceSet();
+                StateMax se = new StateMax(dice, new boolean[8], 0);
+                StateMax.printBestMoveForRound = -1;
+                StateMax.printAllMovesForRound = 0;
+                se.getValue();
+                continue;
             }
             
             int round = Integer.parseInt(parts0[0]);
@@ -53,6 +67,19 @@ public class Lumps{
     
     
     
+    private static int[] getDiceSet()
+    {    
+        int[] dice = new int[8];
+        
+        //build a set of dice
+        for(int i = 0; i < 8; i++){
+            dice[i] = rd.nextInt((i - (i%2))+4)+1;
+        }
+        
+        return dice;    
+    }
+    
+    
     private static void randomSample(){
         
         Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -63,8 +90,6 @@ public class Lumps{
             }
         ); 
         
-        Random rd = new Random();
-        
         StateExpect.printExpectedValueForRound = -1;
         StateMax.printBestMoveForRound = 0;
         
@@ -72,15 +97,11 @@ public class Lumps{
         int count = 0;
         
         StateMax se = null;
-        int[] dice = new int[8];
         
         while(true){
             count ++;
             
-            //build a set of dice
-            for(int i = 0; i < 8; i++){
-                dice[i] = rd.nextInt((i - (i%2))+4)+1;
-            }
+            int[] dice = getDiceSet();
             
             se = new StateMax(dice, new boolean[8], 0);
             
